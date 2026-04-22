@@ -25,14 +25,29 @@ class Pet:
         self.name=name
         self.happiness=happiness
         self.hunger=hunger
+    def feed(self, pettreat):
+        z=pettreat*2+self.hunger
+        if z>10:
+            self.hunger=10
+        elif z<10:
+            self.hunger=z
     def play(self,timeplay):
         hgain=timeplay*.5
         hloss=timeplay*.1
-        self.happiness+=hgain
-        self.hunger-=hloss
+        g=self.hunger-hloss
+        y=self.happiness+hgain
+        if y>10:
+            self.happiness=10
+        if g>0 and y<10:
+            self.happiness+=hgain
+            self.hunger-=hloss
+        elif g<0:
+            print("Not enough hunger. Feed your pet!")
     def checkstat(self):
         print(self.happiness)
         print(self.hunger)
+    
 Daniel=Pet("Daniel", 0, 0) 
+Daniel.feed(5)
 Daniel.play(4)
-Daniel.checkstat
+Daniel.checkstat()
