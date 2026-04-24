@@ -21,31 +21,45 @@ Johnny.buy("Sword") """
 #A method to play() that increases happiness
 #A method to show_status() that prints how happy the pet is
 class Pet:
-    def __init__(self, name, happiness, hunger):
+    def __init__(self, name, happiness, hunger, health, strength, level, xp):
         self.name=name
         self.happiness=happiness
-        self.__hunger=hunger
+        self.hunger=hunger
+        self.xp=xp
+        self.health=health
+        self.strength=strength
+        self.level=level
     def feed(self, pettreat):
-        self.__hunger+pettreat*2
-        if self.__hunger>10:
-            self.__hunger=10
-        print(pettreat)
-        print(self.__hunger)
+        g=self.hunger+pettreat*2
+        if g>10:
+            g=10
+        self.hunger=g
     def play(self,timeplay):
-        if self.happiness+timeplay*.5>10:
-            self.happiness=10
-        if self.__hunger-timeplay*.1>0:
-            self.happiness+timeplay*.5
-            self.__hunger-timeplay*.1
-        elif self.__hunger-timeplay*.1<0:
+        hgain=self.happiness+timeplay*3
+        huloss=self.hunger-timeplay*1
+        if hgain>10:
+            hgain=10
+            self.happiness=hgain
+        if huloss>0:
+            self.happiness=hgain
+            self.hunger=huloss
+            self.xp+1
+        elif huloss<0:
             print("Not enough hunger. Feed your pet!")
-        print(timeplay)
-        print(self.__hunger)
+    def power(level, strength):
+        powerup=level*1.2
+        u=powerup*strength
+
     def checkstat(self):
-        print(self.happiness)
-        print(self.__hunger)
+        print(f"Happiness: {self.happiness}")
+        print(f"Hunger: {self.hunger}")
+        print(f"Health: {self.health}")
+        print(f"Strength: {self.strength}")
+        print(f"XP: {self.xp}")
+        print(f"Level: {self.level}")
     
-Daniel=Pet("Daniel", 0, 0) 
+Daniel=Pet("Daniel", 0, 0, 20, 1, 1, 0) 
+Chicken=Pet("DanielKiller", 0, 0, 100000000, 5000, 100, 0)
 Daniel.feed(5)
 Daniel.play(4)
 Daniel.checkstat()
