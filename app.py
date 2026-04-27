@@ -21,11 +21,10 @@ Johnny.buy("Sword") """
 #A method to play() that increases happiness
 #A method to show_status() that prints how happy the pet is
 class Pet:
-    def __init__(self, name, happiness, hunger, health, strength, level, xp):
+    def __init__(self, name, happiness, hunger, health, strength, level):
         self.name=name
         self.happiness=happiness
         self.hunger=hunger
-        self.xp=xp
         self.health=health
         self.strength=strength
         self.level=level
@@ -37,29 +36,33 @@ class Pet:
     def play(self,timeplay):
         hgain=self.happiness+timeplay*3
         huloss=self.hunger-timeplay*1
-        if hgain>10:
-            hgain=10
-            self.happiness=hgain
+        print(huloss)
         if huloss>0:
             self.happiness=hgain
             self.hunger=huloss
-            self.xp+1
+        if hgain>10:
+            lev=input("Would you like to level up?")
+            if lev=="Yes":
+                poo=self.level+hgain/10
+                self.level=poo
+                hegain=self.health+self.level*10
+                stre=self.strength+self.level*1
+                self.health=hegain
+                self.strength=stre
+                hgain=hgain%10
+            elif lev=="No":
+                self.happiness=hgain
         elif huloss<0:
             print("Not enough hunger. Feed your pet!")
-    def power(level, strength):
-        powerup=level*1.2
-        u=powerup*strength
-
     def checkstat(self):
         print(f"Happiness: {self.happiness}")
         print(f"Hunger: {self.hunger}")
         print(f"Health: {self.health}")
         print(f"Strength: {self.strength}")
-        print(f"XP: {self.xp}")
         print(f"Level: {self.level}")
     
-Daniel=Pet("Daniel", 0, 0, 20, 1, 1, 0) 
-Chicken=Pet("DanielKiller", 0, 0, 100000000, 5000, 100, 0)
+Daniel=Pet("Daniel", 0, 0, 20, 1, 1) 
+Chicken=Pet("DanielKiller", 0, 0, 100000000, 5000, 100)
 Daniel.feed(5)
-Daniel.play(4)
+Daniel.play(10)
 Daniel.checkstat()
