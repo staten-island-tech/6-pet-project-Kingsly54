@@ -58,6 +58,8 @@ class Pet:
                 self.happiness=hgain
         elif huloss<0:
             print("Not enough hunger. Feed your pet!")
+        if huloss<5:
+            print("Your pet hunger is low, feed your pet!")
     def fishing(self, timesfished):
         for i in range(timesfished):
             fish=random.randint(0,2)
